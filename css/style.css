@@ -1,0 +1,42 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: linear-gradient(#8089df, #fff) fixed;
+    font-family: 'PT Serif', serif;
+    font-size: 24px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    margin: 0 auto;
+}
+
+.input,
+.select {
+    margin-bottom: 20px;
+    border: none;
+    outline: none;
+    padding-left: 10px;
+    height: 30px;
+    font-family: 'PT Serif', serif;
+    cursor: pointer;
+}
+
+.btn {
+    width: 90px;
+    margin: 0 auto;
+    border-radius: 30px;
+    background-color: #8089df;
+    cursor: pointer;
+    font-family: 'PT Serif', serif;
+    margin-bottom: 20px;
+}
+
+.btn:hover {
+    background-color: #b8bde9;
+}
