@@ -51,4 +51,4 @@ let Calc2 = function() {
 let calc2 = new Calc2();
 console.log(calc2);
 
-calc2.turnOn();
+calc2.turnOn()
