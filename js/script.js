@@ -228,6 +228,7 @@ class ContactsApp extends Contacts{
         })
 
         this.storage = this.contacts;
+        this.setCookie('contExp', 1, {'max-age':86400})
     }
 
     get storage(){
@@ -238,6 +239,13 @@ class ContactsApp extends Contacts{
     set storage(data) {
         let dataStorage = JSON.stringify(data)
         localStorage.setItem('contacts', dataStorage)
+    }
+
+    editCont = function (name, email, address, tel) {
+        name.setAttribute('contenteditable', 'true');
+        email.setAttribute('contenteditable', 'true');
+        address.setAttribute('contenteditable', 'true');
+        tel.setAttribute('contenteditable', 'true')
     }
 
     saveNote(e, id, name, email, address, tel){
@@ -256,6 +264,7 @@ class ContactsApp extends Contacts{
             this.edit(id, data);  
             console.log(this.contacts)
         }
+        this.storage = this.contacts
     }
 
     contRemove(id) {
@@ -263,26 +272,37 @@ class ContactsApp extends Contacts{
         this.createCont();
     }
 
-    
-
-    editCont = function (name, email, address, tel) {
-        name.setAttribute('contenteditable', 'true');
-        email.setAttribute('contenteditable', 'true');
-        address.setAttribute('contenteditable', 'true');
-        tel.setAttribute('contenteditable', 'true')
+    getCookie(name) {
+        let matches = document.cookie.match(new RegExp(
+          "(?:^|; )" + 'contExp'.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
     }
 
-    
+    setCookie(name, value, options = {}) {
 
-
-
-
-
-
-
-
-
-
+        options = {
+          path: '/',
+          // при необходимости добавьте другие значения по умолчанию
+          ...options
+        };
+      
+        if (options.expires instanceof Date) {
+          options.expires = options.expires.toUTCString();
+        }
+      
+        let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+      
+        for (let optionKey in options) {
+          updatedCookie += "; " + optionKey;
+          let optionValue = options[optionKey];
+          if (optionValue !== true) {
+            updatedCookie += "=" + optionValue;
+          }
+        }
+      
+        document.cookie = updatedCookie;
+      }
 
 }
 
